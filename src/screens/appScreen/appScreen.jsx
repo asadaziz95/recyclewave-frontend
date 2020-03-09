@@ -66,10 +66,9 @@ class Dashboard extends React.Component {
           >
                 <div style={{ margin: "12px 16px 0" }}>
               <Switch>
-              {/* <Route exact path="/projects" render={ProjectLisitngs} /> */}
               <Route
                 exact
-                path="/neworder"
+                path="c"
                 component={createOrder}
               />
             </Switch>

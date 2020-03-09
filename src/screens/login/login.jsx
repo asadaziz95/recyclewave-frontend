@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import axios from 'axios'
 import "./login.css";
 
 
@@ -21,9 +22,41 @@ const tailLayout = {
   },
 };
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const onFinish = values => {
     console.log('Success:', values);
+    let data = {
+      email: values.email,
+      password: values.password,
+    }
+    console.log(data);
+    axios({
+      method: "post",
+      url: `http://localhost:8000/login`,
+      data: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }
+    })
+      .then(response => {
+        if(response.status===200){
+            props.history.push('/neworder')
+        }
+        //console.log(response);
+        //.status
+        // return dispatch({ type: PROJECT_CREATE_SUCCESS, response: response });
+      })
+      .catch(error => {
+        //  debugger;
+        message.error(error.response.data)
+        console.log(error.response.data);
+        // if (error.response.status === 401) {
+        //   dispatch(tokenAuthFailedAction());
+        // }
+
+      });
+
     
   };
 
@@ -41,10 +74,12 @@ const LoginScreen = () => {
       <h1>Recycle wave</h1>
     </Form.Item>
     <Form.Item
-      name="username"
-      rules={[{ required: true, message: 'Please input your Username!' }]}
+      name="email"
+      rules={[{ required: true, message: 'Please input your Email!' },
+      { type: "email", message: 'Email is invalid' }
+    ]}
     >
-      <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+      <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
     </Form.Item>
     <Form.Item
       name="password"

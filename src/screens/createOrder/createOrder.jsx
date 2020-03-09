@@ -12,22 +12,28 @@ import {
   Breadcrumb,
   Progress,
   DatePicker,
-  Icon
+  Icon,
+  Select
 } from "antd";
 import {
   LoadingOutlined,
 } from '@ant-design/icons';
 
-
-
 import "./createOrder.css";
+const { Option } = Select;
+const { TextArea } = Input;
+
+
+
 
 
 const createOrder = props => {
-  const [progress, setProgress] = useState(0);
+//  const [progress, setProgress] = useState(0);
   const { TextArea } = Input;
 
 
+
+ // useEffect(() => { });
   const onFinish = values => {
     if(values){
    
@@ -42,7 +48,7 @@ const createOrder = props => {
   const moveBack = () => {
     props.history.goBack()
   }
-  useEffect(() => { });
+  
 
   const formItemLayout = {
     labelCol: {
@@ -81,25 +87,7 @@ const createOrder = props => {
         }}
       >
         <Row>
-          <Col
-            xs={24}
-            sm={24}
-            md={24}
-            lg={24}
-            xl={24}
-            style={{ marginBottom: 20 }}
-          >
-            <Breadcrumb className="breadcrums-styling">
-              <Breadcrumb.Item>
-                {" "}
-                <Link to="/projects">Projects</Link>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                New Project
-              </Breadcrumb.Item>
-            </Breadcrumb>
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{textAlign:"center"}}>
             <span className="content-title">New Project</span>
           </Col>
         </Row>
@@ -111,8 +99,8 @@ const createOrder = props => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}>
         <Form.Item
-          label="Project Name"
-          name="projectName"
+          label="Name"
+          name="name"
           rules={[
             {
               required: true,
@@ -120,19 +108,71 @@ const createOrder = props => {
             },
             {
               min: 3,
-              message: "Project name should be atleast 3 character!"
+              message: "Name should be atleast 3 character!"
             },
-            {
-              max: 25,
-              message: "Project name  should not be greater then 25 character!"
-            }
+            
           ]}
         >
           <Input />
         </Form.Item>
+        <Form.Item 
+        label="Junk type"  
+        name="type"
+        rules={[
+          {
+            required: true,
+            message: "Please select junk type!"
+          }
+        ]}
+        >
+      <Select>
+        <Option value="gold">Gold</Option>
+        <Option value="silver">Silver</Option>
+        <Option value="plastic">Plastic</Option>
+      </Select>
+    </Form.Item>
+
+    <Form.Item 
+        label="Junk amount"  
+        name="amount"
+        rules={[
+          {
+            required: true,
+            message: "Please select amount!"
+          }
+        ]}
+        >
+      <Select>
+        <Option value="10 to 20">10 to 20</Option>
+        <Option value="20 to 30">20 to 30</Option>
+        <Option value="30 to 40">30 to 40</Option>
+        <Option value="40 to 50">50 to 60</Option>
+      </Select>
+    </Form.Item>
+        <Form.Item name='email' label="Email" rules={[{ type: 'email',message:"Not a valid email" },{required:true,message:"Please write valid email address"}]}>
+        <Input />
+      </Form.Item>
+      <Form.Item
+          label="Address"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input your address name!"
+            },
+            {
+              min: 3,
+              message: "Address should be atleast 3 character!"
+            },
+            
+          ]}
+        >
+         <TextArea rows={3} />
+        </Form.Item>
+
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" style={{ width: 150 }}>
-            Create Project
+            Post Order
           </Button>
 
           <Button style={{ marginLeft: 10 }} onClick={() => moveBack()}>Cancel</Button>
