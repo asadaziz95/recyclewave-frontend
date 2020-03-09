@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Form,
   Input,
@@ -9,16 +8,12 @@ import {
   message,
   Row,
   Col,
-  Breadcrumb,
-  Progress,
-  DatePicker,
-  Icon,
   Select
 } from "antd";
 import {
   LoadingOutlined,
 } from '@ant-design/icons';
-
+import axios from 'axios';
 import "./createOrder.css";
 const { Option } = Select;
 const { TextArea } = Input;
@@ -35,10 +30,49 @@ const createOrder = props => {
 
  // useEffect(() => { });
   const onFinish = values => {
-    if(values){
-   
-      console.log(values);
+    console.log('Success:', values);
+
+    let data = {
+      
+       // "userId":"5e52d23b6259881be4118a64",
+          name:values.name,
+          type:values.type,
+          amount:values.amount,
+          address:values.address,
+          email:values.email,
+          status:"pending"
+    
     }
+    console.log(data);
+    axios({
+      method: "post",
+      url: `http://localhost:8000/createorder`,
+      data: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // "X-User-Email": readLocalStorage("X-User-Email"),
+        // "X-User-Token": readLocalStorage("X-User-Token")
+      }
+    })
+      .then(response => {
+        // if(response.status===200){
+        //     props.history.push('/login')
+        // }
+        console.log(response);
+        //.status
+        // return dispatch({ type: PROJECT_CREATE_SUCCESS, response: response });
+      })
+      .catch(error => {
+        //  debugger;
+        message.error(error.response.data)
+        console.log(error.response.data);
+        // if (error.response.status === 401) {
+        //   dispatch(tokenAuthFailedAction());
+        // }
+
+      });
+
   };
 
   const onFinishFailed = errorInfo => {

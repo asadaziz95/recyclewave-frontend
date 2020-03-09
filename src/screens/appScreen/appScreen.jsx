@@ -9,7 +9,8 @@ import {
   UploadOutlined,
 } from '@ant-design/icons';
 
-import createOrder from "../createOrder/createOrder.jsx"
+import createOrder from "../createOrder/createOrder.jsx";
+import viewOrder from "../viewOrder/viewOrder.jsx";
 
 import './appScreen.css'
 
@@ -68,8 +69,13 @@ class Dashboard extends React.Component {
               <Switch>
               <Route
                 exact
-                path="c"
+                path="/order/add"
                 component={createOrder}
+              />
+                 <Route
+                exact
+                path="/orders/view"
+                component={viewOrder}
               />
             </Switch>
           </div>

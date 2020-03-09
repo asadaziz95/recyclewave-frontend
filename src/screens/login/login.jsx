@@ -41,9 +41,14 @@ const LoginScreen = (props) => {
     })
       .then(response => {
         if(response.status===200){
-            props.history.push('/neworder')
+          localStorage.setItem("token",response.data.token);
+          localStorage.setItem("_id",response.data.data._id)
+          localStorage.setItem("email",response.data.data.email);
+          localStorage.setItem("userType",response.data.data.userType);
+            props.history.push('/orders/view')
         }
-        //console.log(response);
+
+       
         //.status
         // return dispatch({ type: PROJECT_CREATE_SUCCESS, response: response });
       })
