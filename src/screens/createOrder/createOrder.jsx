@@ -22,7 +22,7 @@ const { TextArea } = Input;
 
 
 
-const createOrder = props => {
+const CreateOrder = props => {
 //  const [progress, setProgress] = useState(0);
   const { TextArea } = Input;
 
@@ -40,7 +40,8 @@ const createOrder = props => {
           amount:values.amount,
           address:values.address,
           email:values.email,
-          status:"pending"
+          status:"pending",
+          userId:localStorage.getItem('_id')
     
     }
     console.log(data);
@@ -56,9 +57,10 @@ const createOrder = props => {
       }
     })
       .then(response => {
-        // if(response.status===200){
-        //     props.history.push('/login')
-        // }
+
+        if(response.status===200){
+            props.history.push('/orders/view')
+        }
         console.log(response);
         //.status
         // return dispatch({ type: PROJECT_CREATE_SUCCESS, response: response });
@@ -218,4 +220,4 @@ const createOrder = props => {
   );
 };
 
-export default withRouter(createOrder);
+export default withRouter(CreateOrder);

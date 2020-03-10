@@ -37,12 +37,16 @@ class Dashboard extends React.Component {
             </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
+              <Link to="/orders/view">
               <UserOutlined />
               <span>All orders</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="2">
+              <Link to="/order/add">
               <VideoCameraOutlined />
               <span>Create order</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="3">
               <UploadOutlined />
