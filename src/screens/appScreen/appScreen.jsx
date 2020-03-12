@@ -11,6 +11,7 @@ import {
 
 import createOrder from "../createOrder/createOrder.jsx";
 import viewOrder from "../viewOrder/viewOrder.jsx";
+import addTransporter from "../addTransporter/addTransporter.jsx"
 
 import './appScreen.css'
 
@@ -80,6 +81,11 @@ class Dashboard extends React.Component {
                 exact
                 path="/orders/view"
                 component={viewOrder}
+              />
+                <Route
+                exact
+                path="/transporter/add"
+                component={addTransporter}
               />
             </Switch>
           </div>
