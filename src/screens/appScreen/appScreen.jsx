@@ -30,6 +30,11 @@ class Dashboard extends React.Component {
     });
   };
 
+  Logout=()=>{
+    localStorage.clear();
+    window.location = `/login`
+  }
+
   render() {
     return (
       <Layout>
@@ -49,7 +54,7 @@ class Dashboard extends React.Component {
               <span>Create order</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="3" onClick={()=>this.Logout()}>
               <UploadOutlined />
               <span>Logout</span>
             </Menu.Item>

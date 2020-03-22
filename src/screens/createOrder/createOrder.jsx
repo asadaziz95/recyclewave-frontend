@@ -147,7 +147,7 @@ const CreateOrder = props => {
       >
         <Row>
           <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ textAlign: "center" }}>
-            <span className="content-title">New Project</span>
+            <span className="content-title">Apply now</span>
           </Col>
         </Row>
       </div>
@@ -223,6 +223,18 @@ const CreateOrder = props => {
           </Select>
         </Form.Item>
         <Form.Item name='email' label="Email" rules={[{ type: 'email', message: "Not a valid email" }, { required: true, message: "Please write valid email address" }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Mobile No"
+          name="mobile no"
+          rules={[
+            {
+              required: true,
+              message: "Please input your mobile number!"
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
         <Form.Item
