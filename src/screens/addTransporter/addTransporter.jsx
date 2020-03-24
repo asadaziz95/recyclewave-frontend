@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router-dom";
-import { Form, Input, Button, Checkbox,message } from 'antd';
+import { Form, Input, Button, Checkbox,message,Row,Col } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
-import "./addTransporter.jsx";
+import "./addTransporter.css";
 
 
 
@@ -49,7 +49,8 @@ const SignupScreen = (props) => {
     })
       .then(response => {
         if(response.status===200){
-            props.history.push('/login')
+          message.success("Transporter Added Successfully")
+           // props.history.push('/login')
         }
       })
       .catch(error => {
@@ -68,13 +69,27 @@ const SignupScreen = (props) => {
   };
 
   return (
+    <>
+        <div
+        style={{
+          padding: 24,
+          background: "#fff",
+          minHeight: 120,
+          marginBottom: 20
+        }}
+      >
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ textAlign: "center" }}>
+            <span className="content-title">Add Transporter</span>
+          </Col>
+        </Row>
+      </div>
     <Form
       name="normal_login"
-      className="login-form login-main"
+      className="add-transpoter-main"
       onFinish={onFinish}
     >
       <Form.Item>
-        <h1>Add Transporter</h1>
       </Form.Item>
       <Form.Item
         name="firstName"
@@ -118,6 +133,7 @@ const SignupScreen = (props) => {
       </Button>
       </Form.Item>
     </Form>
+    </>    
   );
 };
 

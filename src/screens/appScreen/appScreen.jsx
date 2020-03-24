@@ -12,6 +12,7 @@ import {
 import createOrder from "../createOrder/createOrder.jsx";
 import viewOrder from "../viewOrder/viewOrder.jsx";
 import addTransporter from "../addTransporter/addTransporter.jsx"
+import viewTransporter from "../viewTransporters/viewTransporters.jsx"
 
 import './appScreen.css'
 
@@ -53,8 +54,21 @@ class Dashboard extends React.Component {
               <VideoCameraOutlined />
               <span>Create order</span>
               </Link>
+              </Menu.Item>
+              <Menu.Item key="3">
+              <Link to="/transporter/add">
+              <VideoCameraOutlined />
+              <span>Add Transporter</span>
+              </Link>
             </Menu.Item>
-            <Menu.Item key="3" onClick={()=>this.Logout()}>
+            <Menu.Item key="4">
+              <Link to="/transporters/view">
+              <VideoCameraOutlined />
+              <span>View Transporters</span>
+              </Link>
+            </Menu.Item>
+      
+            <Menu.Item key="5" onClick={()=>this.Logout()}>
               <UploadOutlined />
               <span>Logout</span>
             </Menu.Item>
@@ -91,6 +105,11 @@ class Dashboard extends React.Component {
                 exact
                 path="/transporter/add"
                 component={addTransporter}
+              />
+                     <Route
+                exact
+                path="/transporters/view"
+                component={viewTransporter}
               />
             </Switch>
           </div>
