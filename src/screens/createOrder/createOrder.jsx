@@ -175,7 +175,7 @@ const CreateOrder = props => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Junk Quantity"
+          label="Junk Type"
           name="type"
           rules={[
             {
