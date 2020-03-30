@@ -62,7 +62,7 @@ const ViewOrder = props => {
       key: "type"
     },
     {
-      title: "Amount",
+      title: "Quantity",
       dataIndex: "amount",
       key: "amount"
     },
@@ -70,6 +70,13 @@ const ViewOrder = props => {
       title: "Address",
       dataIndex: "address",
       key: "address"
+    },
+
+
+    {
+      title: "Mobile Number",
+      dataIndex: "mobileno",
+      key: "mobileno"
     },
     {
       title: "Email",
@@ -89,7 +96,7 @@ const ViewOrder = props => {
       )
     },
     {
-      title: "Assign(Orders)",
+      title: "Order assign",
       key: "action",
       render: (text, record) => (
         <span>
