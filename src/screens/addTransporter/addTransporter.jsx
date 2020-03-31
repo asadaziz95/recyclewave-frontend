@@ -37,7 +37,6 @@ const SignupScreen = (props) => {
       userType: "transporter",
       adminId:localStorage.getItem('_id')
     }
-    console.log(data);
     axios({
       method: "post",
       url: `http://localhost:8000/transpoter_signup`,
@@ -50,14 +49,11 @@ const SignupScreen = (props) => {
       .then(response => {
         if(response.status===200){
           message.success("Transporter Added Successfully")
-           // props.history.push('/login')
+           props.history.push('/transporters/view')
         }
       })
       .catch(error => {
         message.error(error.response.data)
-        console.log(error.response.data);
-
-
       });
 
 

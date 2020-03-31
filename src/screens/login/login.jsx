@@ -47,19 +47,9 @@ const LoginScreen = (props) => {
           localStorage.setItem("userType",response.data.data.userType);
             props.history.push('/orders/view')
         }
-
-       
-        //.status
-        // return dispatch({ type: PROJECT_CREATE_SUCCESS, response: response });
       })
       .catch(error => {
-        //  debugger;
         message.error(error.response.data)
-        console.log(error.response.data);
-        // if (error.response.status === 401) {
-        //   dispatch(tokenAuthFailedAction());
-        // }
-
       });
 
     

@@ -46,23 +46,17 @@ const JunkType = [
 
 
 const CreateOrder = props => {
-  //  const [progress, setProgress] = useState(0);
   const { TextArea } = Input;
-
-
-
-  // useEffect(() => { });
   const onFinish = values => {
     console.log('Success:', values);
 
     let data = {
-
-      // "userId":"5e52d23b6259881be4118a64",
       name: values.name,
       type: values.type,
       amount: values.amount,
       address: values.address,
       email: values.email,
+      mobileno:values.mobileno,
       status: "pending",
       userId: localStorage.getItem('_id')
 
@@ -227,7 +221,7 @@ const CreateOrder = props => {
         </Form.Item>
         <Form.Item
           label="Mobile No"
-          name="mobile no"
+          name="mobileno"
           rules={[
             {
               required: true,

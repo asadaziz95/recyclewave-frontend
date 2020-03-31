@@ -7,7 +7,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
-} from '@ant-design/icons';
+} from '@ant-design/icons'
+import axios from 'axios';
 
 import createOrder from "../createOrder/createOrder.jsx";
 import viewOrder from "../viewOrder/viewOrder.jsx";
@@ -21,6 +22,10 @@ const { Header, Sider, Content } = Layout;
 
 
 class Dashboard extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
   state = {
     collapsed: false,
   };
@@ -32,8 +37,21 @@ class Dashboard extends React.Component {
   };
 
   Logout=()=>{
-    localStorage.clear();
-    window.location = `/login`
+    axios({
+      method: "delete",
+      url: `http://localhost:8000/logout`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-auth":    localStorage.getItem("token")
+      }
+    })
+      .then(response => {
+        if(response.status===200){
+          localStorage.clear();
+            this.props.history.push('/login')
+        }
+      })
   }
 
   render() {
@@ -49,24 +67,38 @@ class Dashboard extends React.Component {
               <span>All orders</span>
               </Link>
             </Menu.Item>
+            {localStorage.getItem("userType")==='user'?
             <Menu.Item key="2">
               <Link to="/order/add">
               <VideoCameraOutlined />
               <span>Create order</span>
               </Link>
               </Menu.Item>
-              <Menu.Item key="3">
-              <Link to="/transporter/add">
-              <VideoCameraOutlined />
-              <span>Add Transporter</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Link to="/transporters/view">
-              <VideoCameraOutlined />
-              <span>View Transporters</span>
-              </Link>
-            </Menu.Item>
+:""}
+
+              {localStorage.getItem("userType")==='admin'?
+              
+                <Menu.Item key="3">
+                <Link to="/transporter/add">
+                <VideoCameraOutlined />
+                <span>Add Transporter</span>
+                </Link>
+              </Menu.Item>:'' 
+            }
+
+{localStorage.getItem("userType")==='admin'?
+              
+              
+<Menu.Item key="4">
+                <Link to="/transporters/view">
+                <VideoCameraOutlined />
+                <span>View Transporters</span>
+                </Link>
+              </Menu.Item>:'' 
+          }
+
+
+            
       
             <Menu.Item key="5" onClick={()=>this.Logout()}>
               <UploadOutlined />

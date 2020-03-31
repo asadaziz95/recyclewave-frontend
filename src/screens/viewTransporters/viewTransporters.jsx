@@ -63,7 +63,7 @@ const ViewOrder = props => {
             >
                 <Row>
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} style={{ textAlign: "center" }}>
-                        <span className="content-title">Orders list</span>
+                        <span className="content-title">Transporter list</span>
                     </Col>
                 </Row>
             </div>

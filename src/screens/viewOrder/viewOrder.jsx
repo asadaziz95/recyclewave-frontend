@@ -10,14 +10,36 @@ const { Option } = Select;
 const ViewOrder = props => {
   const [orders, setOrders] = useState([]);
   const [transporters, setTransporters] = useState([]);
-  const handleChange=(value)=> {
-    console.log(`selected ${value}`);
+  const handleChange=(record,value)=> {
+    const orderId = record._id;
+    const assigneeId = value
+    axios({
+      method: "post",
+      url: `http://localhost:8000/updateorder`,
+      data:{
+        orderId,
+        assigneeId
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        message.success("Assinged successfully")
+        getOrder()
+      //  setOrders(response.data);
+      })
+      .catch(error => {
+        message.error(error.response.data);
+      });
   }
   const getOrder = () => {
     const userID = localStorage.getItem("_id");
+    const userType = localStorage.getItem("userType");
     axios({
       method: "get",
-      url: `http://localhost:8000/orders/${userID}`,
+      url: `http://localhost:8000/orders/${userID}/${userType}`,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -62,7 +84,7 @@ const ViewOrder = props => {
       key: "type"
     },
     {
-      title: "Amount",
+      title: "Quantity",
       dataIndex: "amount",
       key: "amount"
     },
@@ -70,6 +92,13 @@ const ViewOrder = props => {
       title: "Address",
       dataIndex: "address",
       key: "address"
+    },
+
+
+    {
+      title: "Mobile Number",
+      dataIndex: "mobileno",
+      key: "mobileno"
     },
     {
       title: "Email",
@@ -89,26 +118,27 @@ const ViewOrder = props => {
       )
     },
     {
-      title: "Assign(Orders)",
+      title: "Order assign",
       key: "action",
       render: (text, record) => (
         <span>
-          {/* <a style={{ marginRight: 16 }}>Invite {record.name}</a>
-                    <a>Delete</a> */}
+   {
+     localStorage.getItem('userType')==="admin"?
      <Select 
-    //  defaultValue="lucy"
-    onChange={handleChange} 
-     style={{ width: 120 }}>
-   {transporters.map((transporter) =>
-    <Option value={transporter._id}>{transporter.email}</Option>
-      )}
-      {/* <Option value="jack">Jack</Option>
-      <Option value="lucy">Lucy</Option>
-      <Option value="disabled" disabled>
-        Disabled
-      </Option>
-      <Option value="Yiminghe">yiminghe</Option> */}
-    </Select>
+    //  defaultValue={record.email}
+    //  onChange={handleChange} 
+    onChange={(e) => handleChange(record, e)}
+      style={{ width: 120 }}>
+    {transporters.map((transporter) =>
+     <Option value={transporter._id}>{transporter.email}</Option>
+       )}
+     </Select>:
+     
+
+  record.email
+    
+    
+   }
         </span>
       )
     }
