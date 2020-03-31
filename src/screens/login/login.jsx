@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect ,Link} from "react-router-dom";
 import { Form, Input, Button, Checkbox,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios'
@@ -92,6 +92,9 @@ const LoginScreen = (props) => {
       <Button type="primary" htmlType="submit" className="login-form-button" style={{width:"100%"}}>
         Log in
       </Button>
+    </Form.Item>
+    <Form.Item>
+     <Link to="/signup">Or Signup</Link>
     </Form.Item>
   </Form>
   );
