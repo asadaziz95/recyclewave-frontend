@@ -65,7 +65,11 @@ const LoginScreen = (props) => {
     className="login-form login-main"
     onFinish={onFinish}
   >
-    <Form.Item>
+      {/* <Form.Item>
+      <img src="./logoFInal.jpg" />
+    </Form.Item> */}
+    <Form.Item style={{textAlign:"center"}}>
+    <img src="./logoFInal.jpg" style={{width:200}} />
       <h1>Recycle wave</h1>
     </Form.Item>
     <Form.Item

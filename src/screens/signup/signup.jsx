@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, Redirect } from "react-router-dom";
-import { Form, Input, Button, Checkbox,message } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { withRouter, Redirect, Link } from "react-router-dom";
+import { Form, Input, Button, Checkbox, message } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
-import axios from 'axios';
+import axios from "axios";
 import "./signup.css";
-
-
 
 const layout = {
   labelCol: {
-    span: 8,
+    span: 8
   },
   wrapperCol: {
-    span: 16,
-  },
+    span: 16
+  }
 };
 const tailLayout = {
   wrapperCol: {
     offset: 8,
-    span: 16,
-  },
+    span: 16
+  }
 };
 
-const SignupScreen = (props) => {
+const SignupScreen = props => {
   const onFinish = values => {
-    console.log('Success:', values);
+    console.log("Success:", values);
 
     let data = {
       name: {
@@ -34,8 +32,8 @@ const SignupScreen = (props) => {
       },
       email: values.email,
       password: values.password,
-      userType: "user",
-    }
+      userType: "user"
+    };
     console.log(data);
     axios({
       method: "post",
@@ -43,14 +41,14 @@ const SignupScreen = (props) => {
       data: data,
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
         // "X-User-Email": readLocalStorage("X-User-Email"),
         // "X-User-Token": readLocalStorage("X-User-Token")
       }
     })
       .then(response => {
-        if(response.status===200){
-            props.history.push('/login')
+        if (response.status === 200) {
+          props.history.push("/login");
         }
         //console.log(response);
         //.status
@@ -58,20 +56,16 @@ const SignupScreen = (props) => {
       })
       .catch(error => {
         //  debugger;
-        message.error(error.response.data)
+        message.error(error.response.data);
         console.log(error.response.data);
         // if (error.response.status === 401) {
         //   dispatch(tokenAuthFailedAction());
         // }
-
       });
-
-
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -80,24 +74,34 @@ const SignupScreen = (props) => {
       className="login-form login-main"
       onFinish={onFinish}
     >
-      <Form.Item>
+      <Form.Item style={{ textAlign: "center" }}>
+        <img src="./logoFInal.jpg" style={{ width: 200 }} />
         <h1>Recycle wave</h1>
       </Form.Item>
       <Form.Item
         name="firstName"
-        rules={[{ required: true, message: 'Please input your first name!' }]}
+        rules={[{ required: true, message: "Please input your first name!" }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="FirstName" />
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="FirstName"
+        />
       </Form.Item>
       <Form.Item
         name="lastName"
-        rules={[{ required: true, message: 'Please input your last name!' }]}
+        rules={[{ required: true, message: "Please input your last name!" }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="LastName" />
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="LastName"
+        />
       </Form.Item>
       <Form.Item
         name="email"
-        rules={[{ required: true, message: 'Email!' }, { type: 'email', message: 'Please input valid email' }]}
+        rules={[
+          { required: true, message: "Email!" },
+          { type: "email", message: "Please input valid email" }
+        ]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -107,8 +111,9 @@ const SignupScreen = (props) => {
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' },
-        { min: 8, message: 'Password length is short' }
+        rules={[
+          { required: true, message: "Please input your Password!" },
+          { min: 8, message: "Password length is short" }
         ]}
       >
         <Input
@@ -118,20 +123,21 @@ const SignupScreen = (props) => {
         />
       </Form.Item>
 
-
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: "100%" }}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+          style={{ width: "100%" }}
+        >
           Sign up
-      </Button>
+        </Button>
+      </Form.Item>
+      <Form.Item>
+        <Link to="/login">Or Login</Link>
       </Form.Item>
     </Form>
   );
 };
-
-
-
-
-
-
 
 export default withRouter(SignupScreen);

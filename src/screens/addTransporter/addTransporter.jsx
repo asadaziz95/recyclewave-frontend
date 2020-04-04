@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { Form, Input, Button, Checkbox,message,Row,Col } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined,IdcardOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
 import "./addTransporter.css";
@@ -35,6 +35,7 @@ const SignupScreen = (props) => {
       email: values.email,
       password: values.password,
       userType: "transporter",
+      licenseNumber:values.licenseNumber,
       adminId:localStorage.getItem('_id')
     }
     axios({
@@ -121,7 +122,18 @@ const SignupScreen = (props) => {
           placeholder="Password"
         />
       </Form.Item>
-
+      <Form.Item
+        name="licenseNumber"
+        rules={[{ required: true, message: 'Please input your License Number!' },
+        // { min: 12, message: 'Password length is short' }
+        ]}
+      >
+        <Input
+          prefix={<IdcardOutlined className="site-form-item-icon" />}
+          placeholder="License Number"
+        />
+      </Form.Item>
+      
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: "100%" }}>

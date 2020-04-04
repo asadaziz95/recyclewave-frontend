@@ -10,13 +10,13 @@ const { Option } = Select;
 const ViewOrder = props => {
   const [orders, setOrders] = useState([]);
   const [transporters, setTransporters] = useState([]);
-  const handleChange=(record,value)=> {
+  const handleChange = (record, value) => {
     const orderId = record._id;
-    const assigneeId = value
+    const assigneeId = value;
     axios({
       method: "post",
       url: `http://localhost:8000/updateorder`,
-      data:{
+      data: {
         orderId,
         assigneeId
       },
@@ -26,14 +26,14 @@ const ViewOrder = props => {
       }
     })
       .then(response => {
-        message.success("Assinged successfully")
-        getOrder()
-      //  setOrders(response.data);
+        message.success("Assinged successfully");
+        getOrder();
+        //  setOrders(response.data);
       })
       .catch(error => {
         message.error(error.response.data);
       });
-  }
+  };
   const getOrder = () => {
     const userID = localStorage.getItem("_id");
     const userType = localStorage.getItem("userType");
@@ -54,23 +54,23 @@ const ViewOrder = props => {
       });
   };
   const getTransporters = () => {
-    const userID = localStorage.getItem('_id');
+    const userID = localStorage.getItem("_id");
     axios({
-        method: "get",
-        url: `http://localhost:8000/transporters/${userID}`,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        }
+      method: "get",
+      url: `http://localhost:8000/transporters/${userID}`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     })
-        .then(response => { 
-            console.log(response.data);
-            setTransporters(response.data);
-         })
-        .catch(error => {
-            message.error(error.response.data)
-        });
-}
+      .then(response => {
+        console.log(response.data);
+        setTransporters(response.data);
+      })
+      .catch(error => {
+        message.error(error.response.data);
+      });
+  };
   const columns = [
     {
       title: "Name",
@@ -93,7 +93,6 @@ const ViewOrder = props => {
       dataIndex: "address",
       key: "address"
     },
-
 
     {
       title: "Mobile Number",
@@ -122,23 +121,20 @@ const ViewOrder = props => {
       key: "action",
       render: (text, record) => (
         <span>
-   {
-     localStorage.getItem('userType')==="admin"?
-     <Select 
-    //  defaultValue={record.email}
-    //  onChange={handleChange} 
-    onChange={(e) => handleChange(record, e)}
-      style={{ width: 120 }}>
-    {transporters.map((transporter) =>
-     <Option value={transporter._id}>{transporter.email}</Option>
-       )}
-     </Select>:
-     
-
-  record.email
-    
-    
-   }
+          {localStorage.getItem("userType") === "admin" ? (
+            <Select
+               defaultValue={record.email}
+              //  onChange={handleChange}
+              onChange={e => handleChange(record, e)}
+              style={{ width: 120 }}
+            >
+              {transporters.map(transporter => (
+                <Option value={transporter._id}>{transporter.email}</Option>
+              ))}
+            </Select>
+          ) : (
+            record.email
+          )}
         </span>
       )
     }

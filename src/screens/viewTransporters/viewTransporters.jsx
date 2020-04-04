@@ -41,6 +41,11 @@ const ViewOrder = props => {
             render: text => <a>{text[0].firstName +' '+text[0].lastName}</a>,
         },
         {
+            title: "License Number",
+            dataIndex: "licenseNumber",
+            key: "licenseNumber"
+          },
+        {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',

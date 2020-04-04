@@ -58,7 +58,12 @@ class Dashboard extends React.Component {
     return (
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className="logo">
+          {/* <div className="logo">
+             <img src="./logoFinal.jpg" />
+            Recycle Wave
+            </div> */}
+            <div className="logo">
+
             </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
